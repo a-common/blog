@@ -1,6 +1,6 @@
 ---
 title: PWN环境搭建
-published: 2025-09-27
+published: 2026-09-27
 description: 本篇文章是有关于pwn做题环境搭建的引导教程
 image: https://img.liksy0.cn/file/1790494293238_anita-austvika-li1iEY9JqC8-unsplash.jpg
 tags:
