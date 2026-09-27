@@ -9,7 +9,7 @@ tags:
   - CTF
 category: 环境搭建
 series: 从0开始的PWN基础教学
-draft: no
+draft: false
 author: Liksy_0
 boolean: "true"
 ---
