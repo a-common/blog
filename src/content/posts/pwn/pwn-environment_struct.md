@@ -136,7 +136,7 @@ sudo apt install language-pack-zh-hans language-pack-zh-hans-base
 
 ## 正式的PWN环境配置
 
-在下面的安装过程中，只要代了**--break-system-packages**”这个参数就是为了避免python包管理工具的警告，所以安装结束的时候可能会有**warming** 这是正常现象  
+在下面的安装过程中，只要代了“**--break-system-packages**”这个参数就是为了避免python包管理工具的警告，所以安装结束的时候可能会有**warming** 这是正常现象  
 
 先执行更新软件源指令
 ```bash
