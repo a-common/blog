@@ -4,7 +4,7 @@ published: 2026-10-8
 image: https://img.liksy0.cn/file/1791431675966_dzo-PtzS6h6dk2E-unsplash.jpg
 description: 关于linux实用性改进和终端美化
 author: Liksy_0
-draft: true
+draft: false
 tags:
   - 终端美化
   - zsh
@@ -38,7 +38,7 @@ sudo apt install zsh -y
 ```bash
 chsh -s /bin/zsh
 ```
-输入指令并且输入密码之后，重新打开一个终端，会有一个初始化设置
+输入指令并且输入密码之后，重新打开一个终端，会有一个初始化设置，这里我们选择 **1** 继续设置
 ![image.png](https://img.liksy0.cn/file/1791425112449_image.png)
 
 然后呢，会让你选择如何配置zsh(如下)，我们选0即可
@@ -72,17 +72,20 @@ vim .zshrc
 ### 插件安装
 众所周知，linux没有自动补全和错误提示是比较烦人的，但是以下这几款插件就可以完美解决这些烦人的问题
 
->zsh-autocomplete **自动补全**
+># zsh-autocomplete **自动补全** `这里本来想用这个插件来自动不补全的，但是一直有冲突所以后面的教程改用zsh原生的补全设置来实现补全，不依赖这个插件`
   zsh-autosuggestions **输入建议**
   zsh-syntax-highlighting **错误提示**
 
-1.首先先安装这几个插件到 **~/.oh-my-zsh/custom/plugins/** 目录下
+1.首先先安装这几个插件到 **~/.oh-my-zsh/custom/plugins/** 目录下 (**第三个补全插件由于作者设置时一直出现错误，所以后边关于补全设置的教程并没有使用这个插件，愿意折腾的小伙伴可以自行尝试**)
 ```bash
 # 1. 安装 zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # 2. 安装 zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# 3. 安装 zsh-autocomplete 
+# git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
 ```
 
 2.然后打开编辑软件，再次编辑配置文件
