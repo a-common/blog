@@ -41,3 +41,15 @@ chsh -s /bin/zsh
 输入指令并且输入密码之后，重新打开一个终端，会有一个初始化设置
 ![image.png](https://img.liksy0.cn/file/1791425112449_image.png)
 
+然后呢，会让你选择如何配置zsh(如下)，我们选0即可
+![image.png](https://img.liksy0.cn/file/1791425559297_image.png)
+
+4.安装完这个之后，可以继续安装on-my-zsh这个插件来美化zsh终端
+```bah
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+安装过程中会有两个选项给你，都选 **y** 即可
+安装完成显示如下界面即可
+![image.png](https://img.liksy0.cn/file/1791425906836_image.png)
+
