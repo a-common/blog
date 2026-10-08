@@ -4,7 +4,7 @@ published: 2026-10-8
 image: https://img.liksy0.cn/file/1791431675966_dzo-PtzS6h6dk2E-unsplash.jpg
 description: 关于linux实用性改进和终端美化
 author: Liksy_0
-draft: false
+draft: true
 tags:
   - 终端美化
   - zsh
