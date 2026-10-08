@@ -46,7 +46,8 @@ chsh -s /bin/zsh
 
 4.安装完这个之后，可以继续安装on-my-zsh这个插件来美化zsh终端
 ```bah
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL
+https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 安装过程中会有两个选项给你，都选 **y** 即可
