@@ -1,7 +1,7 @@
 ---
 title: Linux美化
 published: 2026-10-8
-image:
+image: https://img.liksy0.cn/file/1791431675966_dzo-PtzS6h6dk2E-unsplash.jpg
 description: 关于linux实用性改进和终端美化
 author: Liksy_0
 draft: true
@@ -77,22 +77,42 @@ vim .zshrc
 
 1.首先先安装这几个插件到 **~/.oh-my-zsh/custom/plugins/** 目录下
 ```bash
-# 1. 安装 zsh-autocomplete
-git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
-
-# 2. 安装 zsh-autosuggestions
+# 1. 安装 zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-# 3. 安装 zsh-syntax-highlighting
+# 2. 安装 zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
 2.然后打开编辑软件，再次编辑配置文件
 把插件文件名放入plugins中，其中需要注意的是
-**zsh-syntax-highlighting**这个插件必须放在最后一个，以确保它能正确处理其他插件产生的命令高亮
-同时增加
-**# 为 zsh-autocomplete 添加的配置
-zstyle ':completion:*' menu select**
-这一句配置，这个配置可以让补全菜单支持用方向键选择，体验更好。(完成如下图)
-![屏幕截图 2026-10-08 110426.png](https://img.liksy0.cn/file/1791428691206_屏幕截图_2026-10-08_110426.png)
+**zsh-syntax-highlighting**这个插件必须放在最后一个，以确保它能正确处理其他插件产生的命令高亮(完成如下图)
+![屏幕截图 2026-10-08 114344.png](https://img.liksy0.cn/file/1791431053853_屏幕截图_2026-10-08_114344.png)
 
+2.配置自动补全
+在 **source $ZSH/oh-my-zsh.sh**后面加上这几句代码(完成如下)
+```baah
+# 原生菜单补全配置
+zstyle ':completion:*' menu select
+bindkey '^I' menu-complete
+bindkey '^[[Z' reverse-menu-complete
+bindkey -M menuselect '^I' menu-complete
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+```
+![屏幕截图 2026-10-08 114558.png](https://img.liksy0.cn/file/1791431189183_屏幕截图_2026-10-08_114558.png)
+
+配置完成之后用这个命令就可以开始体验插件了
+```bash
+source ~/.zshrc
+```
+
+### 效果展示
+这样设置之后，在你输入cd等指令之后，就会有之前的命令提示，在点击以下右箭头就能补全![屏幕截图 2026-10-08 114739.png](https://img.liksy0.cn/file/1791431289701_屏幕截图_2026-10-08_114739.png)
+
+在输入cd 等命令之后，还能按tab进行可视化选择，不用先ls看一下这个目录下到底有什么
+![屏幕截图 2026-10-08 114725.png](https://img.liksy0.cn/file/1791431282906_屏幕截图_2026-10-08_114725.png)
+
+其余的插件可以[ohmyzsh/plugins/git at master · ohmyzsh/ohmyzsh](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git)在这查看，自己试着装装
+
+结语：
+到此，有关zsh美化和使用性改进到此结束啦，感谢你的阅读
