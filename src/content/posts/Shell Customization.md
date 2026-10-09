@@ -9,6 +9,8 @@ tags:
   - zsh
 draft: false
 category: 环境搭建
+comment: true
+pinned: false
 ---
 ## zsh介绍
 zsh 是一个兼容 bash 的 shell，相较 bash 具有以下优点：
