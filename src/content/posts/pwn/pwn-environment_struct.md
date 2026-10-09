@@ -11,7 +11,6 @@ category: 环境搭建
 series: 从0开始的PWN基础教学
 draft: false
 author: Liksy_0
-boolean: "true"
 ---
 ## 虚拟机(Vmware Workstation)安装
 
