@@ -4,10 +4,10 @@ published: 2026-10-8
 image: https://img.liksy0.cn/file/1791431675966_dzo-PtzS6h6dk2E-unsplash.jpg
 description: 关于linux实用性改进和终端美化
 author: Liksy_0
-draft: false
 tags:
   - 终端美化
   - zsh
+draft: false
 ---
 ## zsh介绍
 zsh 是一个兼容 bash 的 shell，相较 bash 具有以下优点：
