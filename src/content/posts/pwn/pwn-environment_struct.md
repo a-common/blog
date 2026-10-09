@@ -8,7 +8,6 @@ tags:
   - PWN
   - CTF
 category: 环境搭建
-series: 从0开始的PWN基础教学
 draft: false
 author: Liksy_0
 comment: true
