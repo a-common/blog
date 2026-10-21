@@ -43,3 +43,11 @@ unsorted bin 被实现为一个**双向链表**（doubly-linked list）。作为
 而这个链表的**头节点**，正是位于 `main_arena` 结构体中的一个字段。由于 `main_arena` 是 libc 库的一部分，其地址自然就是一个 **libc 地址**。因此，这个空闲块的 `fd` 和 `bk` 指针就被设置成了指向 `main_arena` 内部的某个地址，从而表现为一个 libc 地址。
 
 这个指向 `main_arena` 内部的特定地址通常是 **`main_arena + 88`**（在64位系统上），这个偏移量是 `main_arena` 结构体中 `bins` 数组的起始地址。
+
+
+
+文件连接
+1.
+patchelf --set-rpath /home/liksy/PWN/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/x86_64-linux-gnu pwn1_patched
+2.
+patchelf --set-interpreter /home/liksy/PWN/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/x86_64-linux-gnu/ld-2.23.so ./pwn1_patched
