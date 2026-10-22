@@ -1,7 +1,11 @@
 <script lang="ts">
 import { onMount, tick } from "svelte";
 import ClientPagination from "@/components/common/ClientPagination.svelte";
-import { formatTimezoneOffset } from "@/utils/date-utils";
+import {
+	formatDynamicDate,
+	formatDynamicDisplayDate,
+	formatTimezoneOffset,
+} from "@/utils/date-utils";
 import { fetchMemos } from "@/utils/memos-adapter";
 import { registerDynamicGallery } from "./dynamic-gallery";
 import { registerDynamicInlineComments } from "./dynamic-inline-comments";
@@ -158,29 +162,17 @@ function createItem(entry: DynamicData) {
 	if (time) {
 		const date = new Date(entry.published);
 		time.dateTime = date.toISOString();
+		// 只显示「月日」，完整时间放进 title 提示，避免 00:00:00 这类噪声
 		// 第三方 API 和 Memos 使用浏览器本地时区，不做额外时区转换
 		if (source.startsWith("http") || memos?.enable) {
 			time.textContent = date.toLocaleDateString("zh-CN", {
-				year: "numeric",
-				month: "2-digit",
-				day: "2-digit",
-				hour: "2-digit",
-				minute: "2-digit",
+				month: "long",
+				day: "numeric",
 			});
+			time.title = date.toLocaleString("zh-CN");
 		} else {
-			time.textContent = new Intl.DateTimeFormat(
-				document.documentElement.lang || undefined,
-				{
-					timeZone: "UTC",
-					year: "numeric",
-					month: "2-digit",
-					day: "2-digit",
-					hour: "2-digit",
-					minute: "2-digit",
-					second: "2-digit",
-				},
-			).format(date);
-			time.textContent += ` ${formatTimezoneOffset(timezone, date)}`;
+			time.textContent = formatDynamicDisplayDate(date);
+			time.title = `${formatDynamicDate(date)} ${formatTimezoneOffset(timezone, date)}`;
 		}
 	}
 	const location = root.querySelector<HTMLElement>("[data-dynamic-location]");

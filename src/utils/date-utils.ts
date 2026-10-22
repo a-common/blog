@@ -1,5 +1,27 @@
 import { siteConfig } from "../config";
 
+// 语言代码映射
+const DATE_LOCALE_MAP: Record<string, string> = {
+	zh_CN: "zh-CN",
+	zh_TW: "zh-TW",
+	en: "en-US",
+	ja: "ja-JP",
+	ko: "ko-KR",
+	es: "es-ES",
+	th: "th-TH",
+	vi: "vi-VN",
+	tr: "tr-TR",
+	id: "id-ID",
+	fr: "fr-FR",
+	de: "de-DE",
+	ru: "ru-RU",
+	ar: "ar-SA",
+};
+
+function resolveDateLocale(lang: string): string {
+	return DATE_LOCALE_MAP[lang] || "en-US";
+}
+
 export function formatDateToYYYYMMDD(date: Date): string {
 	return date.toISOString().substring(0, 10);
 }
@@ -30,25 +52,7 @@ export function formatDateI18n(
 		(options as Intl.DateTimeFormatOptions).timeZone = siteConfig.timezone;
 	}
 
-	// 语言代码映射
-	const localeMap: Record<string, string> = {
-		zh_CN: "zh-CN",
-		zh_TW: "zh-TW",
-		en: "en-US",
-		ja: "ja-JP",
-		ko: "ko-KR",
-		es: "es-ES",
-		th: "th-TH",
-		vi: "vi-VN",
-		tr: "tr-TR",
-		id: "id-ID",
-		fr: "fr-FR",
-		de: "de-DE",
-		ru: "ru-RU",
-		ar: "ar-SA",
-	};
-
-	const locale = localeMap[lang] || "en-US";
+	const locale = resolveDateLocale(lang);
 	return includeTime
 		? date.toLocaleString(locale, options)
 		: date.toLocaleDateString(locale, options);
@@ -74,6 +78,16 @@ export function formatDynamicDate(dateInput: Date | string): string {
 	const get = (type: Intl.DateTimeFormatPartTypes) =>
 		parts.find((part) => part.type === type)?.value || "";
 	return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
+}
+
+// 动态时间展示：只显示月日（如「10月18日」），完整时间通过 title 属性提示
+export function formatDynamicDisplayDate(dateInput: Date | string): string {
+	const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+	return new Intl.DateTimeFormat(resolveDateLocale(siteConfig.lang || "en"), {
+		timeZone: "UTC",
+		month: "long",
+		day: "numeric",
+	}).format(date);
 }
 
 export function formatTimezoneOffset(

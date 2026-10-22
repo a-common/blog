@@ -251,6 +251,8 @@ dynamic-feed {
 
 .dynamic-time:hover {
 	color: var(--primary);
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
 }
 
 .dynamic-location {

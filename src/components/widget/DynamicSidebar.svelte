@@ -6,7 +6,10 @@
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { onMount } from "svelte";
-import { formatDynamicDate } from "@/utils/date-utils";
+import {
+	formatDynamicDate,
+	formatDynamicDisplayDate,
+} from "@/utils/date-utils";
 import { fetchWithDedup } from "@/utils/fetch-dedup";
 import { fetchMemos } from "@/utils/memos-adapter";
 import { url } from "@/utils/url-utils";
@@ -72,20 +75,23 @@ function getPlainText(html: string): string {
 	return div.textContent?.trim() || "";
 }
 
-// 格式化日期
-// 本地 API 使用 formatDynamicDate（带时区转换）
+// 格式化日期：列表里只显示月日，完整时间通过 title 属性提示
+// 本地 API 按 UTC 计算（动态内容里的日期是 UTC 零点）
 // 第三方 API 和 Memos 使用浏览器本地时区，不做额外转换
 function formatDate(timestamp: number): string {
 	if (apiUrl.startsWith("http") || memos?.enable) {
 		return new Date(timestamp).toLocaleDateString("zh-CN", {
-			year: "numeric",
-			month: "2-digit",
-			day: "2-digit",
-			hour: "2-digit",
-			minute: "2-digit",
+			month: "long",
+			day: "numeric",
 		});
 	}
-	return formatDynamicDate(new Date(timestamp));
+	return formatDynamicDisplayDate(new Date(timestamp));
+}
+
+function formatDateTitle(timestamp: number): string {
+	return apiUrl.startsWith("http") || memos?.enable
+		? new Date(timestamp).toLocaleString("zh-CN")
+		: formatDynamicDate(new Date(timestamp));
 }
 </script>
 
@@ -118,7 +124,10 @@ function formatDate(timestamp: number): string {
 						<svg class="size-4 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 							<path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
 						</svg>
-						<time datetime={new Date(entry.published).toISOString()}>
+						<time
+							datetime={new Date(entry.published).toISOString()}
+							title={formatDateTitle(entry.published)}
+						>
 							{formatDate(entry.published)}
 						</time>
 						{#if entry.pinned}
