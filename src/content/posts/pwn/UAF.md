@@ -1,5 +1,6 @@
 ---
 title: 堆题中的Use After Free漏洞
+published: 2026-10-21
 tags:
   - CTF
   - PWN
