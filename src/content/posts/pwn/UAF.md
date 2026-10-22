@@ -46,7 +46,7 @@ unsorted bin 被实现为一个**双向链表**（doubly-linked list）。作为
 
 
 
-文件连接
+文件链接
 1.
 patchelf --set-rpath /home/liksy/PWN/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/x86_64-linux-gnu pwn1_patched
 2.
