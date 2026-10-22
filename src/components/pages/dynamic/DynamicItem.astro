@@ -7,11 +7,7 @@ import DynamicInlineComments from "@/components/pages/dynamic/DynamicInlineComme
 import { dynamicConfig, profileConfig, siteConfig } from "@/config";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
-import {
-	formatDynamicDate,
-	formatDynamicDisplayDate,
-	formatTimezoneOffset,
-} from "@/utils/date-utils";
+import { formatDynamicDate, formatTimezoneOffset } from "@/utils/date-utils";
 import { dynamicAnchor } from "@/utils/dynamic-utils";
 import { url } from "@/utils/url-utils";
 
@@ -30,12 +26,11 @@ const {
 } = Astro.props;
 const { Content } = await render(entry);
 const anchorId = dynamicAnchor(entry.id);
-const published = formatDynamicDisplayDate(entry.data.published);
+const published = formatDynamicDate(entry.data.published);
 const timezone = formatTimezoneOffset(
 	siteConfig.timezone || "UTC",
 	entry.data.published,
 );
-const publishedTitle = `${formatDynamicDate(entry.data.published)} ${timezone}`;
 const permalink = detailUrl || `#${anchorId}`;
 const location = entry.data.location.trim();
 const profileLabel = i18n(I18nKey.dynamicProfile).replace(
@@ -72,11 +67,8 @@ const profileUrl = url(dynamicConfig.profileUrl || "/about/");
 				</a>
 				<div class="dynamic-meta">
 					<a class="dynamic-time" href={permalink}>
-						<time
-							datetime={entry.data.published.toISOString()}
-							title={publishedTitle}
-						>
-							{published}
+						<time datetime={entry.data.published.toISOString()}>
+							{published} {timezone}
 						</time>
 					</a>
 					{location && (
